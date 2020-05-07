@@ -2,6 +2,6 @@
 
 use Core\Route;
 
-Route::get('foo', 'Home@show');
+Route::get('/', 'Home@index');
 
-Route::get('/', 'home@index');
+Route::get('foo', 'Home@show');

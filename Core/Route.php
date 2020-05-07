@@ -3,50 +3,48 @@
 namespace Core;
 
 use App\Controllers;
+use App\View;
 
 class Route
 {
+
+    public static $notFound;
+
+    public static $request;
+
     /**
      * @param string $uri
-     * @param $controller controller@method
+
+     * @param $controller Controller@method
      */
 
     public static function get(string $uri, $ControllerATmetod)
     {
-        $request = self::request();
 
-
-        if ($request === $uri) {
+        if (self::$request === $uri) {
 
             $ControllerATmetod = explode('@', $ControllerATmetod);
-            $name = 'App\Controllers\\'. $ControllerATmetod[0];
-            $method = $ControllerATmetod[1];
 
-            $controller = new $name;
-            $controller->$method();
+            $controllerName = 'App\Controllers\\'. $ControllerATmetod[0];
+            $methodName = $ControllerATmetod[1];
 
-        }/* else {
+            $controller = new $controllerName;
+            $controller->$methodName();
 
-            echo '404 Not Found';
+            exit;
 
-        }*/
-    }
-
-    public static function request()
-    {
-        $request = explode('/', $_SERVER['REQUEST_URI']);
-
-        $request = array_diff($request, ['']);
-
-        unset($request[1]);
-
-        if (empty($request)){
-            $request = '/';
-        } else {
-            $request = implode('/', $request);
         }
 
-        return $request;
+        self::$notFound = true;
+
+    }
+
+
+    public static function notFound()
+    {
+
+        echo '404 Not Found';
+
     }
 
 }
