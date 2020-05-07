@@ -9,4 +9,8 @@
 
 include_once __DIR__ . '/lib/Route.php';
 
-\lib\Route::get('foo', 'home');
+use \lib\Route;
+
+Route::get('foo', 'Home@show');
+
+Route::get('/', 'home@index');
