@@ -7,9 +7,11 @@ use App\View;
 
 class Route
 {
-
-    public static $notFound;
-
+    /**
+     * @var
+     *
+     * $request
+     */
     public static $request;
 
     /**
@@ -18,8 +20,9 @@ class Route
      * @param $controller Controller@method
      */
 
-    public static function get(string $uri, $ControllerATmetod)
+    public static function get(string $uri, string $ControllerATmetod)
     {
+        var_dump(self::$request);die;
 
         if (self::$request === $uri) {
 
@@ -34,8 +37,6 @@ class Route
             exit;
 
         }
-
-        self::$notFound = true;
 
     }
 

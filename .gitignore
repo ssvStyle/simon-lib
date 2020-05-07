@@ -2,3 +2,5 @@ workspace.xml
 .idea/workspace.xml
 /.idea/
 /vendor/
+
+#https://github.com/ssvStyle/simon-lib.git

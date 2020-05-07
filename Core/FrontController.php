@@ -12,11 +12,7 @@ class FrontController
 
         require_once __DIR__ . '/../routes/web.php';
 
-        if (Route::$notFound){
-
-            Route::notFound();
-
-        }
+        Route::notFound();
 
     }
 
@@ -29,9 +25,13 @@ class FrontController
         unset($request[1]);
 
         if (empty($request)) {
+
             $request = '/';
+
         } else {
+
             $request = implode('/', $request);
+
         }
 
         return $request;
