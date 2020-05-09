@@ -8,33 +8,32 @@ class FrontController
     public function run()
     {
 
-        Route::$request = $this->getRequest();
+        $route = new Route(new ParseRequestUri());
 
         require_once __DIR__ . '/../routes/web.php';
 
-        Route::notFound();
+        if (!$route->params){
 
-    }
-
-    protected function getRequest()
-    {
-        $request = explode('/', $_SERVER['REQUEST_URI']);
-
-        $request = array_diff($request, ['']);
-
-        unset($request[1]);
-
-        if (empty($request)) {
-
-            $request = '/';
+            echo '404 Not Found';
 
         } else {
 
-            $request = implode('/', $request);
+            $controllerName = $route->params['ctrl'];
+            $methodName = $route->params['method'];
+
+            $controller = new $controllerName;
+
+            $controller->setData([
+                'get' => $_GET,
+                'post' => $_POST,
+                'files' => $_FILES,
+            ]);
+
+            $controller->$methodName();
 
         }
 
-        return $request;
+
     }
 
 }

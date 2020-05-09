@@ -2,49 +2,30 @@
 
 namespace Core;
 
-use App\Controllers;
-use App\View;
-
 class Route
 {
-    /**
-     * @var
-     *
-     * $request
-     */
-    public static $request;
 
-    /**
-     * @param string $uri
+    public $params = [];
 
-     * @param $controller Controller@method
-     */
+    protected $requestUri;
 
-    public static function get(string $uri, string $ControllerATmetod)
+    public function __construct(ParseRequestUri $parseRequestUri)
     {
-        var_dump(self::$request);die;
-
-        if (self::$request === $uri) {
-
-            $ControllerATmetod = explode('@', $ControllerATmetod);
-
-            $controllerName = 'App\Controllers\\'. $ControllerATmetod[0];
-            $methodName = $ControllerATmetod[1];
-
-            $controller = new $controllerName;
-            $controller->$methodName();
-
-            exit;
-
-        }
-
+        $this->requestUri = $parseRequestUri;
     }
 
 
-    public static function notFound()
+    public function uri(string $uri, string $ctrlAtMethod)
     {
 
-        echo '404 Not Found';
+        if ($this->requestUri->get() === $uri) {
+
+            $ctrlAtMethod = explode('@', $ctrlAtMethod);
+
+            $this->params['ctrl'] = 'App\Controllers\\'.$ctrlAtMethod[0];
+            $this->params['method'] = $ctrlAtMethod[1];
+
+        }
 
     }
 

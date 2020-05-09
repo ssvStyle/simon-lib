@@ -1,9 +1,19 @@
 <?php
 
-use Core\Route;
+/**
+ * This is a routes file.
+ * The route and controller@method can be set in the format
+ *$route->uri('foo/bar', 'Controller@method');
+ *
+ *
+ * GET and POST params will be added
+ * and available in the controller
+ * automatically in the variable $this->data['get']|$this->data['post']...
+ *
+ */
 
-Route::get('/', 'Home@index');
+$route->uri('/', 'Home@index');
 
-Route::get('foo', 'Home@show');
+$route->uri('foo', 'Home@showById');
 
-Route::get('foo/{id}', 'Home@showById');
+

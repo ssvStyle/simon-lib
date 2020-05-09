@@ -15,3 +15,6 @@ use Core\FrontController;
 $myApp = new FrontController();
 
 $myApp->run();
+
+
+
