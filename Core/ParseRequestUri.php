@@ -15,16 +15,20 @@ class ParseRequestUri
     public function get()
     {
         $request = explode('/', $_SERVER['REQUEST_URI']);
-
-        $request = array_diff( $request, [''] );
+        //var_dump($_SERVER['REQUEST_URI']);die;
+        //$request = array_diff( $request, [''] );
 
         unset( $request[1] );
 
-        if (preg_match_all('~[?]\w*[=]\w*~', end($request))) {
+        $patternGetRequest = '~([?]\w*[=]\w*).+~';
 
-            array_pop($request);
+        if (preg_match($patternGetRequest, end($request))) {
+
+            $request = preg_replace($patternGetRequest, '', $request);
 
         }
+
+        $request = array_diff( $request, [''] );
 
         if ( empty( $request ) ) {
 
@@ -37,13 +41,6 @@ class ParseRequestUri
         }
 
         return $request;
-    }
-
-    public function getParams()
-    {
-
-
-
     }
 
 }
