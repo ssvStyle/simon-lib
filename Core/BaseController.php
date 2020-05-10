@@ -3,7 +3,7 @@
 namespace Core;
 
 use App\View;
-use Core\interfaces\BaseController as BaseControllerInterfase;
+use Core\Interfaces\BaseController as BaseControllerInterfase;
 
 abstract class BaseController implements BaseControllerInterfase
 {

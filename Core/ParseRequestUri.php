@@ -1,12 +1,14 @@
 <?php
 
 namespace Core;
+
+use \Core\Interfaces\ParseRequestUriInterface;
 /**
  * Class ParseUri
  *
  * @package Core
  */
-class ParseRequestUri
+class ParseRequestUri implements ParseRequestUriInterface
 {
 
     protected $request;

@@ -2,7 +2,9 @@
 
 namespace Core;
 
-class Route
+use Core\Interfaces\RouteInterface;
+
+class Route implements RouteInterface
 {
 
     public $params = [];
