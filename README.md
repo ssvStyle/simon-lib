@@ -1,2 +1,2 @@
-# HomeWork2
-course of training 2
+# SIMON-LIB
+

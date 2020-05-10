@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Controllers\Home;
+
 class FrontController
 {
 
@@ -19,7 +21,9 @@ class FrontController
 
         if (!$route->params){
 
-            echo '404 Not Found';
+            $home = new Home();
+
+            $home->notFound();
 
         } else {
 
@@ -27,12 +31,6 @@ class FrontController
             $methodName = $route->params['method'];
 
             $controller = new $controllerName;
-
-            $controller->setData([
-                'get' => $_GET,
-                'post' => $_POST,
-                'files' => $_FILES,
-            ]);
 
             $controller->$methodName();
 

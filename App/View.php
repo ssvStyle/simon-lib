@@ -25,7 +25,9 @@ class View
         extract($this->data);
 
         include __DIR__ . '/../templates/' . $template . '.php';
+
         $content = ob_get_contents();
+
         ob_end_clean();
 
         return $content;
@@ -36,9 +38,9 @@ class View
         echo $this->render($template);
     }
 
-    public function withParams(array $data = [])
+    public function withParams(string $varName, $data)
     {
-        $this->data = $data;
+        $this->data[$varName] = $data;
 
         return $this;
     }

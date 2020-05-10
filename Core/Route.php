@@ -11,14 +11,14 @@ class Route
 
     public function __construct(ParseRequestUri $parseRequestUri)
     {
-        $this->requestUri = $parseRequestUri;
+        $this->requestUri = $parseRequestUri->get();
     }
 
 
     public function uri(string $uri, string $ctrlAtMethod)
     {
 
-        if ($this->requestUri->get() === $uri) {
+        if ($this->requestUri === $uri) {
 
             $ctrlAtMethod = explode('@', $ctrlAtMethod);
 

@@ -16,7 +16,8 @@ class Authorization extends BaseController
 
     public function login()
     {
-        echo 'Authorization Controller and method login';
+        return $this->view
+            ->display('auth/login');
     }
 
     public function registration()

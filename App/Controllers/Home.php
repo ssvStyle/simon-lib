@@ -11,8 +11,16 @@ class Home extends BaseController
     {
 
         return $this->view
-            ->withParams(['id' => 234])
+            ->withParams('id', 5)
             ->display('index');
     }
+
+    public function notFound()
+    {
+
+        return $this->view
+            ->display('404');
+    }
+
 
 }
