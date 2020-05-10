@@ -2,8 +2,9 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
 
+        <div class="col-md-6">
+            <h3>Sign in</h3>
             <form>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>

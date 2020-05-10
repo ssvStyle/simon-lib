@@ -22,7 +22,7 @@ class Authorization extends BaseController
 
     public function register()
     {
-        echo 'Authorization Controller and method registration';
+        return $this->view->display('auth/register');
     }
 
     public function logout()
