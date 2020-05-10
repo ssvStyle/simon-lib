@@ -20,7 +20,7 @@ class Authorization extends BaseController
             ->display('auth/login');
     }
 
-    public function registration()
+    public function register()
     {
         echo 'Authorization Controller and method registration';
     }

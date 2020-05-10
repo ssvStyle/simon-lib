@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include __DIR__ . '/../vendor/autoload.php';
+include __DIR__ . '/vendor/autoload.php';
 
 use Core\FrontController;
 

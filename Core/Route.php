@@ -17,10 +17,10 @@ class Route implements RouteInterface
     }
 
 
-    public function uri(string $uri, string $ctrlAtMethod)
+    public function uri(string $urn, string $ctrlAtMethod)
     {
 
-        if ($this->requestUri === $uri) {
+        if ($this->requestUri === $urn) {
 
             $ctrlAtMethod = explode('@', $ctrlAtMethod);
 

@@ -6,6 +6,6 @@ namespace Core\interfaces;
 interface RouteInterface
 {
 
-    public function uri(string $uri, string $ctrlAtMethod);
+    public function uri(string $urn, string $ctrlAtMethod);
 
 }

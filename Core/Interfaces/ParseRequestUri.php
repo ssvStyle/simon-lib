@@ -3,7 +3,7 @@
 namespace Core\interfaces;
 
 
-interface ParseRequestUriInterface
+interface ParseRequestUri
 {
 
     public function get();

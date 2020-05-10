@@ -13,6 +13,10 @@
  */
 
 $route->uri('/', 'Home@index');
+$route->uri('home', 'Home@index');
+$route->uri('register', 'Auth\Authorization@register');
+$route->uri('login', 'Auth\Authorization@login');
+$route->uri('logout', 'Auth\Authorization@logout');
 
 
 

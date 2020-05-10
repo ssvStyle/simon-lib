@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use \Core\Interfaces\ParseRequestUriInterface;
+use \Core\Interfaces\ParseRequestUri as ParseRequestUriInterface;
 /**
  * Class ParseUri
  *
