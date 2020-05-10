@@ -14,7 +14,17 @@
 
 $route->uri('/', 'Home@index');
 
-$route->uri('foo', 'Home@showById');
+
+
+
+
+
+
+
+
+
+
+?>
 
 
 

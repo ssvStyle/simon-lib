@@ -12,6 +12,11 @@ class FrontController
 
         require_once __DIR__ . '/../routes/web.php';
 
+        $route->uri('registration', 'Auth\Authorization@registration');
+        $route->uri('login', 'Auth\Authorization@login');
+        $route->uri('logout', 'Auth\Authorization@logout');
+
+
         if (!$route->params){
 
             echo '404 Not Found';
