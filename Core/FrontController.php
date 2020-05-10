@@ -8,7 +8,7 @@ class FrontController
     public function run()
     {
 
-        $route = new Route(new ParseRequestUri());
+        $route = new Route(new ParseRequestUri( $_SERVER['REQUEST_URI'] ));
 
         require_once __DIR__ . '/../routes/web.php';
 

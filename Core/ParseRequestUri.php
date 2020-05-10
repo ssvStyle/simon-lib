@@ -9,38 +9,36 @@ namespace Core;
 class ParseRequestUri
 {
 
-    /**
-     * @return string
-     */
-    public function get()
+    protected $request;
+
+    public function __construct(string $request)
     {
-        $request = explode('/', $_SERVER['REQUEST_URI']);
-        //var_dump($_SERVER['REQUEST_URI']);die;
-        //$request = array_diff( $request, [''] );
+        $patternGetParams = '~([?]\w*[=]\w*).+~';
 
-        unset( $request[1] );
+        $request = preg_replace($patternGetParams, '', $request);
 
-        $patternGetRequest = '~([?]\w*[=]\w*).+~';
+        $request = preg_replace('~^\/[\w\-\.\+\?\#]*\/~', '', $request);
 
-        if (preg_match($patternGetRequest, end($request))) {
-
-            $request = preg_replace($patternGetRequest, '', $request);
-
-        }
-
-        $request = array_diff( $request, [''] );
+        $request = preg_replace('~\/$~', '', $request);
 
         if ( empty( $request ) ) {
 
             $request = '/';
 
-        } else {
-
-            $request = implode('/', $request);
-
         }
+        
+        $this->request = $request;
 
-        return $request;
+    }
+
+    /**
+     * @return string
+     */
+    public function get()
+    {
+
+        return $this->request;
+
     }
 
 }
