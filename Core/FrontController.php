@@ -18,7 +18,7 @@ class FrontController
 
         } else {
 
-            $controllerName = $route->params['ctrl'];
+            $controllerName = 'App\Controllers\\'.$route->params['ctrl'];
             $methodName = $route->params['method'];
 
             $controller = new $controllerName;

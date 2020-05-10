@@ -22,7 +22,7 @@ class Route
 
             $ctrlAtMethod = explode('@', $ctrlAtMethod);
 
-            $this->params['ctrl'] = 'App\Controllers\\'.$ctrlAtMethod[0];
+            $this->params['ctrl'] = $ctrlAtMethod[0];
             $this->params['method'] = $ctrlAtMethod[1];
 
         }
