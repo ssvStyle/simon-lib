@@ -1,22 +1,36 @@
 <?php
-
 /**
  * This is a routes file.
+ *
  * The route and controller@method can be set in the format
- *$route->uri('foo/bar', 'Controller@method');
+ * route => controller@method
+ * '/home' => 'home@index',
+ *
+ * route
+ * '/article/show/{id}'
+ *
+ * {id} params
+ *
+ * or route
+ * '/articles/page/{page}/sort/{sort}'
+ *
+ * {page} .. {sort} params
  *
  *
- * GET and POST params will be added
+ * params will be added
  * and available in the controller
- * automatically in the variable $this->data['get']|$this->data['post']...
+ * automatically in the variable $this->data[page]|$this->data[sort]...
  *
  */
 
-$route->uri('/', 'Home@index');
-$route->uri('home', 'Home@index');
-$route->uri('register', 'Auth\Authorization@register');
-$route->uri('login', 'Auth\Authorization@login');
-$route->uri('logout', 'Auth\Authorization@logout');
+
+return [
+    '/' => 'home@index',
+    '/home' => 'home@index',
+    '/register' => 'authorization@register',
+    '/login' => 'authorization@login',
+    '/logout' => 'authorization@logout',
+]
 
 
 

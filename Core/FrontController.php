@@ -10,25 +10,30 @@ class FrontController
     public function run()
     {
 
-        $route = new Route(new ParseRequestUri( $_SERVER['REQUEST_URI'] ));
+        $router = new Router( $_SERVER['REQUEST_URI'] );
 
-        require_once __DIR__ . '/../routes/web.php';
+        $response = $router->response();
 
-        if (!$route->params){
+        if ($response){
+
+            $parseCtrlAtMethod = new ParseCtrlAndMethodName($response['ctrlAtMethod']);
+
+
+            $controllerName = 'App\Controllers\\'. $parseCtrlAtMethod->getCtrl();
+            $methodName = $parseCtrlAtMethod->getMethod();
+
+            $controller = new $controllerName;
+
+            $controller->setData($response['args']);
+
+            $controller->$methodName();
+
+
+        } else {
 
             $home = new Home();
 
             $home->notFound();
-
-        } else {
-
-            $controllerName = 'App\Controllers\\'.$route->params['ctrl'];
-            $methodName = $route->params['method'];
-
-            $controller = new $controllerName;
-
-            $controller->$methodName();
-
         }
 
 

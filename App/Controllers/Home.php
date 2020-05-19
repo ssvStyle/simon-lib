@@ -11,7 +11,7 @@ class Home extends BaseController
     {
 
         return $this->view
-            ->withParams('id', 5)
+            //->withParams('id', $this->data)
             ->display('index');
     }
 

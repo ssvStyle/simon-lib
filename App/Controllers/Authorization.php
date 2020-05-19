@@ -6,7 +6,7 @@
  * Time: 16:17
  */
 
-namespace App\Controllers\Auth;
+namespace App\Controllers;
 
 
 use Core\BaseController;
