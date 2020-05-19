@@ -11,4 +11,4 @@ $auth = new Authorization(new Db);
 
 $auth->exitAuth();
 
-header('Location: index.php');
+header('Location: index.html.twig');

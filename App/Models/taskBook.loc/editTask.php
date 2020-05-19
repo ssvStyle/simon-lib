@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($tasks->insert()){
 
         $_SESSION['success'] = 'Добавлено новое задание';
-        header('Location: index.php');
+        header('Location: index.html.twig');
 
     };
 }

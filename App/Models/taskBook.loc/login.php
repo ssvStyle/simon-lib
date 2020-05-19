@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($auth->loginAndPassValidation($_POST['login'], $_POST['pass'])) {
 
             $auth->setAuth();
-            header('Location: index.php');
+            header('Location: index.html.twig');
 
         } else {
 

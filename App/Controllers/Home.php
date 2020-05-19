@@ -10,16 +10,15 @@ class Home extends BaseController
     public function index()
     {
 
-        return $this->view
-            //->withParams('id', $this->data)
-            ->display('index');
+        echo $this->view
+            ->display('index.html.twig');
     }
 
     public function notFound()
     {
 
-        return $this->view
-            ->display('404');
+        echo $this->view
+            ->display('404.html.twig');
     }
 
 

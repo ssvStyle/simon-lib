@@ -82,7 +82,7 @@ if ($auth->adminVerify()) {
 
             }
 
-            header('Location: index.php');
+            header('Location: index.html.twig');
 
         }
 

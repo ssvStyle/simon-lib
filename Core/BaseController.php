@@ -21,7 +21,11 @@ abstract class BaseController implements BaseControllerInterfase
 
     public function __construct()
     {
-        $this->view = new View();
+        $loader = new \Twig\Loader\FilesystemLoader('templates');
+
+        $this->view = new \Twig\Environment($loader, [
+            'cache' => 'cache',
+            ]);
     }
 
     /**

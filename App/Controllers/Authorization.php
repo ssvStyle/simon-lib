@@ -16,13 +16,13 @@ class Authorization extends BaseController
 
     public function login()
     {
-        return $this->view
-            ->display('auth/login');
+        echo $this->view
+            ->display('auth/login.php');
     }
 
     public function register()
     {
-        return $this->view->display('auth/register');
+        echo $this->view->display('auth/register.php');
     }
 
     public function logout()

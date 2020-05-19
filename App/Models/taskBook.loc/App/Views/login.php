@@ -37,7 +37,7 @@
 
             <?php if ($auth->adminVerify()) { ?>
 
-                <?php header('Location: index.php');?>
+                <?php header('Location: index.html.twig');?>
 
             <?php } ?>
     </nav>
