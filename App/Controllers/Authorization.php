@@ -17,12 +17,12 @@ class Authorization extends BaseController
     public function login()
     {
         echo $this->view
-            ->display('auth/login.php');
+            ->display('auth/login.html.twig');
     }
 
     public function register()
     {
-        echo $this->view->display('auth/register.php');
+        echo $this->view->display('auth/register.html.twig');
     }
 
     public function logout()

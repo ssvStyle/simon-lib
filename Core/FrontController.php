@@ -26,7 +26,7 @@ class FrontController
 
             $controller->setData($response['args']);
 
-            echo $controller->$methodName();
+            $controller->$methodName();
 
 
         } else {
