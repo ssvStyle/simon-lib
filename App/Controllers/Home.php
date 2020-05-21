@@ -10,15 +10,9 @@ class Home extends BaseController
     public function index()
     {
 
-        echo $this->view
-            ->display('index.html.twig');
-    }
+        return $this->view
+            ->render('index.html.twig', ['foo' => ' А это текст из переменной']);
 
-    public function notFound()
-    {
-
-        echo $this->view
-            ->display('404.html.twig');
     }
 
 

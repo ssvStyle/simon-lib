@@ -39,9 +39,12 @@ class __TwigTemplate_9d952f25bacd765d23f4745671e842b48ee1d987fd5bbb8210cde59eafd
         <div class=\"col-md-8 text-center\">
             <h1>Simon-lib</h1>
             <p>Welcome to Simon-lib</p>
+
         </div>
     </div>
 </div>
+
+
 ";
     }
 

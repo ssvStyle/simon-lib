@@ -26,14 +26,15 @@ class FrontController
 
             $controller->setData($response['args']);
 
-            $controller->$methodName();
+            echo $controller->$methodName();
 
 
         } else {
 
-            $home = new Home();
+            http_response_code(404);
 
-            $home->notFound();
+            include __DIR__ . '/../templates/404.html';
+
         }
 
 

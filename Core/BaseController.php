@@ -25,6 +25,7 @@ abstract class BaseController implements BaseControllerInterfase
 
         $this->view = new \Twig\Environment($loader, [
             'cache' => 'cache',
+            'auto_reload' => true
             ]);
     }
 
