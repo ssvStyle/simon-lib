@@ -4,9 +4,18 @@ namespace Core;
 
 use App\Controllers\Home;
 
+/**
+ * Class FrontController
+ *
+ * @package Core
+ */
 class FrontController
 {
 
+    /**
+     *
+     *
+     */
     public function run()
     {
 
@@ -36,7 +45,6 @@ class FrontController
             include __DIR__ . '/../templates/404.html';
 
         }
-
 
     }
 
