@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Db;
+use App\Models\Db;
 
 class Pagination
 {
@@ -11,22 +11,25 @@ class Pagination
     protected $db;
     protected $page;
 
-    public function __construct(Db $db)
+    public function __construct(Db $db, $table, $limit)
     {
         $this->db = new $db;
-        $sql = 'SELECT COUNT(*) FROM tasks';
-        $this->count =  (int)$db->simpleQuery($sql) ["COUNT(*)"];
+        $sql = 'SELECT COUNT(*) FROM ' . $table;
+        $this->count = (int)$db->query($sql, [])[0]['COUNT(*)'];
+        $this->limit = $limit;
+
 
     }
 
     /**
-     * @param int $limit
+     * @param int $page
      *
-     * @return object
+     * @return object;
      */
-    public function setLimit( $limit )
+    public function setPage($page)
     {
-        $this->limit = $limit;
+
+        $this->page = $page;
         return $this;
 
     }
@@ -34,21 +37,14 @@ class Pagination
     /**
      * @param int $page
      *
-     */
-    public function setPage($page)
-    {
-
-        $this->page = $page;
-
-    }
-
-    /**
-     * @param int $page
-     *
      * @return array|object
      */
-    public function getPageData($page)
+    public function getFromToByPage($page)
     {
+        if ($page > $this->getPageNums()) {
+            $page = 1;
+        }
+
         if ($page <= 1) {
 
             $start = 0;
@@ -66,39 +62,7 @@ class Pagination
             }
         }
 
-        $sql = 'SELECT * FROM tasks LIMIT ' . $start . ', ' . $this->limit;
-
-        return $this->db->query($sql, [] , '\App\Models\Task');
-
-    }
-
-    /**
-     * @param int $page
-     *
-     * @return array|object
-     */
-    public function getPageDataSortBy($page, $sortType, $field)
-    {
-        if ($page <= 1) {
-
-            $start = 0;
-
-        } else {
-
-            $start = 0;
-            $page--;
-
-            while ($page > 0 ) {
-
-                $start += $this->limit;
-                $page--;
-
-            }
-        }
-
-        $sql = 'SELECT * FROM tasks ORDER BY ' . $field . ' ' . $sortType . ' LIMIT ' . $start . ', ' . $this->limit;
-
-        return $this->db->query($sql, [] , '\App\Models\Task');
+        return ['from' => $start, 'to' => $this->limit];
 
     }
 
@@ -133,6 +97,21 @@ class Pagination
         }
 
         return $this->page + 1;
+
+    }
+
+    /**
+     * @return bool|int
+     *
+     */
+    public function getPrevPage()
+    {
+
+        if (($this->page - 1) <= 0){
+            return false;
+        }
+
+        return $this->page - 1;
 
     }
 
