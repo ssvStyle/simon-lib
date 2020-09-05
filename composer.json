@@ -2,11 +2,12 @@
     "name": "simonov/simon-lib",
     "description": "MVC (framework) library, routes, user friendly URL, form verification, registration, authorization, pagination, orm, log, bootstrap",
     "type": "library",
-    "license": "free",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Serj Simonov",
             "email": "ssv.style@gmail.com"
+            "role": "Developer"
         }
     ],
     "minimum-stability": "stable",
