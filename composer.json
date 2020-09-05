@@ -10,7 +10,6 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
       "App\\": "App/",
