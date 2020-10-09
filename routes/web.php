@@ -25,11 +25,17 @@
 
 
 return [
-    '/' => 'home@index',
-    '/home' => 'home@index',
-    '/register' => 'authorization@register',
-    '/login' => 'authorization@login',
-    '/logout' => 'authorization@logout',
+    'web' => [
+        'route' => '/',
+        'requestMethod' => 'GET',
+        'controller' => 'home',
+        'method' => 'index',
+    ],
+    //'/' => 'home@index',
+    //'/home' => 'home@index',
+    //'/register' => 'authorization@register',
+    //'/login' => 'authorization@login',
+    //'/logout' => 'authorization@logout',
 ]
 
 

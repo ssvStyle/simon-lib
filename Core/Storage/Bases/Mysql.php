@@ -1,15 +1,15 @@
 <?php
+namespace Core\Storage\Bases;
 
-namespace App\Models;
+use Core\Interfaces\Db\DataBaseInterface;
 
-
-class Db
+class Mysql implements DataBaseInterface
 {
     protected $dbh;
 
     public function __construct()
     {
-        $config = (include __DIR__ . '/../../config/db.php');
+        $config = (include __DIR__ . '/../../../config/connection.php')['mysql'];
         $this->dbh = new \PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'].';charset=utf8', $config['user'], $config['pass']);
     }
 
@@ -17,7 +17,7 @@ class Db
     {
         $sth = $this->dbh->prepare($sql);
         $sth->execute($data);
-        return  $sth->fetchAll();
+        return  $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function queryRetObj($sql, $data = [], $class)

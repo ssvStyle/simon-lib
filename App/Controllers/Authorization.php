@@ -1,17 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ssv
- * Date: 10.05.20
- * Time: 16:17
- */
 
 namespace App\Controllers;
 
+use App\AccessController;
 
-use Core\BaseController;
-
-class Authorization extends BaseController
+class Authorization extends AccessController
 {
 
     public function login()

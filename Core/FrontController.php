@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use App\Controllers\Home;
+use Core\Interfaces\RouterInterface;
 
 /**
  * Class FrontController
@@ -11,38 +11,38 @@ use App\Controllers\Home;
  */
 class FrontController
 {
+    protected $router;
 
-    /**
-     *
-     *
-     */
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
     public function run()
     {
 
-        $router = new Router( $_SERVER['REQUEST_URI'] );
-
-        $response = $router->response();
+        $response = $this->router->response();
 
         if ($response){
 
-            $parseCtrlAtMethod = new ParseCtrlAndMethodName($response['ctrlAtMethod']);
+            $controllerName = 'App\Controllers\\' . ucfirst($response['controller']);
 
-
-            $controllerName = 'App\Controllers\\'. $parseCtrlAtMethod->getCtrl();
-            $methodName = $parseCtrlAtMethod->getMethod();
+            $methodName = $response['method'];
 
             $controller = new $controllerName;
 
             $controller->setData($response['args']);
 
-            $controller->access()->$methodName();
+            header('Access-Control-Allow-Origin: *');
+            header('Content-type: text/html; charset=utf-8');
+
+            echo $controller->access($response['access'])->$methodName();
 
 
         } else {
 
+            header("HTTP/1.0 404 Not Found");
             http_response_code(404);
-
-            include __DIR__ . '/../templates/404.html';
 
         }
 
