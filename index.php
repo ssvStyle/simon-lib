@@ -9,9 +9,6 @@ use Core\Router;
 
 /**
  * SIMON-LIB
- *
- *
- *
  */
 
 

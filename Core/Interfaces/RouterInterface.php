@@ -9,6 +9,8 @@ interface RouterInterface
 
     public function getParams();
 
-    public function response();
+    public function getRouteMapParams() : array;
+
+    public function response() : bool ;
 
 }

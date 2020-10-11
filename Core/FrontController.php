@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use App\Service\Access;
 use Core\Interfaces\RouterInterface;
 
 /**
@@ -21,25 +22,39 @@ class FrontController
     public function run()
     {
 
-        $response = $this->router->response();
+        if ($this->router->response()){
 
-        if ($response){
+            $params = $this->router->getRouteMapParams();
 
-            $controllerName = 'App\Controllers\\' . ucfirst($response['controller']);
+            $controllerName = 'App\Controllers\\' . ucfirst($params['controller']);
+            $methodName = $params['method'];
 
-            $methodName = $response['method'];
+            $access = new Access();
 
-            $controller = new $controllerName;
+            if ($access->permission($params['access'] ?? 'all')) {
 
-            $controller->setData($response['args']);
+                $controller = new $controllerName;
 
-            header('Access-Control-Allow-Origin: *');
-            header('Content-type: text/html; charset=utf-8');
+                $controller->setData($this->router->getParams());
 
-            echo $controller->access($response['access'])->$methodName();
+                header('Access-Control-Allow-Origin: *');
+                header('Content-type: text/html; charset=utf-8');
+
+                echo $controller->$methodName();
+
+            } else {
+
+                header("HTTP/1.0 401 Unauthorized");
+                http_response_code(401);
+                exit('Access Denied. You don’t have permission to access for this page');
+
+            }
+
 
 
         } else {
+
+            include __DIR__ . '/../templates/404.html';
 
             header("HTTP/1.0 404 Not Found");
             http_response_code(404);

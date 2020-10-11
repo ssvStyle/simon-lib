@@ -8,22 +8,12 @@ class ParseRoute implements \Core\Interfaces\ParseRouteInterface
      *
      * @return string
      */
-    public function getRegexpFromRoute(string $route)
+    public function getRegexpFromRoute(string $route) : string
     {
-        $route = explode('/', $route);
+        $route = str_replace('{', '(?<', $route);
+        $route = str_replace('}', '>(\w*))', $route);
 
-        foreach ($route as $k => $name) {
+        return '~^' . $route . '$~';
 
-            if (preg_match('~\{\w*\}~', $name)){
-
-                $name = preg_replace('~\{|\}~', '', $name);
-                $route[$k] = preg_replace('~'.$name.'~', '(?<' . $name . '>(\w*))', $name);
-
-            }
-        }
-
-        $route = implode('\/', $route);
-
-        return ('~^' . $route . '$~');
     }
 }

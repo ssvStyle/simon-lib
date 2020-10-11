@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\AccessController;
+use Core\BaseController;
 
-class Authorization extends AccessController
+class Authorization extends BaseController
 {
 
     public function login()

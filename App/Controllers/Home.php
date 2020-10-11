@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\AccessController;
+use Core\BaseController;
 
-class Home extends AccessController
+class Home extends BaseController
 {
 
     public function index()

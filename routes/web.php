@@ -2,12 +2,18 @@
 /**
  * This is a routes file.
  *
- * The route and controller@method can be set in the format
- * route => controller@method
- * '/home' => 'home@index',
+ * The route and controller, method can be set in the format
+
  *
  * route
- * '/article/show/{id}'
+ *
+ * 'web' => [
+ *   'route' => '/article/show/{id}',
+ *   'requestMethod' => 'POST'  ? 'GET' default
+ *   'controller' => 'home',
+ *   'method' => 'index',
+ *   'access' => false   ? true default
+ *   ],
  *
  * {id} params
  *
@@ -19,23 +25,33 @@
  *
  * params will be added
  * and available in the controller
- * automatically in the variable $this->data[page]|$this->data[sort]...
+ * automatically in the variable $this->data['page']|$this->data['sort']...
  *
  */
 
 
 return [
-    'web' => [
+    [
         'route' => '/',
-        'requestMethod' => 'GET',
         'controller' => 'home',
         'method' => 'index',
     ],
-    //'/' => 'home@index',
-    //'/home' => 'home@index',
-    //'/register' => 'authorization@register',
-    //'/login' => 'authorization@login',
-    //'/logout' => 'authorization@logout',
+    [
+        'route' => '/home',
+        'controller' => 'home',
+        'method' => 'index',
+    ],
+    [
+        'route' => '/home/{id}',
+        'controller' => 'home',
+        'method' => 'index',
+        'access' => 'close'
+    ],
+    [
+        'route' => '/home/id/{id}/sort/{sort}',
+        'controller' => 'home',
+        'method' => 'index',
+    ],
 ]
 
 

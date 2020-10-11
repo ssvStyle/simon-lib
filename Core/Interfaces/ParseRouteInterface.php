@@ -9,6 +9,6 @@ interface ParseRouteInterface
      *
      * @return string
      */
-    public function getRegexpFromRoute(string $route);
+    public function getRegexpFromRoute(string $route): string;
 
 }

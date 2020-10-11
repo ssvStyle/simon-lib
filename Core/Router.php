@@ -5,34 +5,22 @@ namespace Core;
 class Router implements \Core\Interfaces\RouterInterface
 {
     protected $routeMap;
+
+    protected $requestMethod;
+
+    protected $routeMapParams;
     
     protected $request;
+
+    protected $params = [];
 
     protected $parseRoute;
 
     public function __construct(string $request)
     {
-        $this->request = $request;
-        
-        $this->routeMap = include __DIR__ . '/../routes/web.php';
-
-        $this->parseRoute = new ParseRoute();
-
-
-    }
-
-    public function getParams()
-    {
-        //
-    }
-
-    public function response()
-    {
-        $rez = [];
-
         $patternGetParams = '~([?]\w*[=]\w*).+~';
 
-        $request = preg_replace($patternGetParams, '', $this->request);
+        $request = preg_replace($patternGetParams, '', $request);
 
         $request = preg_replace('~^\/[\w\-\.\+\?\#]*~', '', $request);
 
@@ -44,31 +32,61 @@ class Router implements \Core\Interfaces\RouterInterface
 
         }
 
-        $requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
+        $this->request = $request;
+        
+        $this->routeMap = include __DIR__ . '/../routes/web.php';
 
+        $this->parseRoute = new ParseRoute();
+
+        $this->requestMethod= filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
+
+
+    }
+
+    public function getParams() : array
+    {
+        return $this->params;
+    }
+
+    public function getRouteMapParams() : array
+    {
+        return $this->routeMapParams;
+    }
+
+    public function response(): bool
+    {
 
         foreach ($this->routeMap as $web) {
 
-            if ((bool)preg_match($this->parseRoute->getRegexpFromRoute($web['route']), $request, $params) && $requestMethod === $web['requestMethod']) {
+            $routeReqMethod = $web['requestMethod'] ?? 'GET';
 
-                $args = [];
+            $routeCond = $web['route'] === $this->request ||
+                         (bool)preg_match($this->parseRoute->getRegexpFromRoute($web['route']), $this->request, $params) &&
+                         $this->requestMethod === $routeReqMethod;
 
-                foreach ($params as $k => $v) {
-                    if (!is_numeric($k)) {
-                        $args[$k] = $v;
+            if ($routeCond) {
+
+                //unset($params[0]);
+
+                if (!empty($params)) {
+
+                    foreach ($params as $k => $v) {
+                        if (!is_numeric($k)) {
+
+                            $this->params[$k] = $v;
+
+                        }
                     }
+
                 }
 
-                //$rez['ctrlAtMethod'] = $web['controller'] . '@' . $web['method'];
-                $rez['controller'] = $web['controller'];
-                $rez['method'] = $web['method'];
-                $rez['args'] = $args;
+                $this->routeMapParams = $web;
+
+                return true;
 
             }
         }
 
-        $rez['access'] = $web['access'] ?? true;
-        //var_dump($rez);die('response');
-        return $rez;
+        return false;
     }
 }
