@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\LogSave\ToTxt;
+
 class Router implements \Core\Interfaces\RouterInterface
 {
     protected $routeMap;
@@ -55,6 +57,8 @@ class Router implements \Core\Interfaces\RouterInterface
 
     public function response(): bool
     {
+        $loger = new Loger(new ToTxt());
+
 
         foreach ($this->routeMap as $web) {
 
@@ -65,8 +69,6 @@ class Router implements \Core\Interfaces\RouterInterface
                          $this->requestMethod === $routeReqMethod;
 
             if ($routeCond) {
-
-                //unset($params[0]);
 
                 if (!empty($params)) {
 
@@ -87,6 +89,10 @@ class Router implements \Core\Interfaces\RouterInterface
             }
         }
 
+        $loger->log('info', 'Route not found' , [
+            'Request' =>  $this->request,
+            'Request Method' => $this->requestMethod,
+        ]);
         return false;
     }
 }

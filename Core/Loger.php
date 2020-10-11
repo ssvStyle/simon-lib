@@ -2,10 +2,19 @@
 
 namespace Core;
 
+use Core\LogSave\LogSaveInterf;
 use Psr\Log\LoggerInterface;
 
 class Loger implements LoggerInterface
 {
+
+    protected $storage;
+
+    public function __construct(LogSaveInterf $storage)
+    {
+        $this->storage = $storage;
+
+    }
 
     /**
      * System is unusable.
@@ -15,7 +24,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function emergency($message, array $context = array())
+    public function emergency($message, array $context = [])
     {
         // TODO: Implement emergency() method.
     }
@@ -31,7 +40,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function alert($message, array $context = array())
+    public function alert($message, array $context = [])
     {
         // TODO: Implement alert() method.
     }
@@ -46,7 +55,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function critical($message, array $context = array())
+    public function critical($message, array $context = [])
     {
         // TODO: Implement critical() method.
     }
@@ -60,7 +69,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function error($message, array $context = array())
+    public function error($message, array $context = [])
     {
         // TODO: Implement error() method.
     }
@@ -76,7 +85,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function warning($message, array $context = array())
+    public function warning($message, array $context = [])
     {
         // TODO: Implement warning() method.
     }
@@ -89,7 +98,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function notice($message, array $context = array())
+    public function notice($message, array $context = [])
     {
         // TODO: Implement notice() method.
     }
@@ -104,7 +113,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function info($message, array $context = array())
+    public function info($message, array $context = [])
     {
         // TODO: Implement info() method.
     }
@@ -117,7 +126,7 @@ class Loger implements LoggerInterface
      *
      * @return void
      */
-    public function debug($message, array $context = array())
+    public function debug($message, array $context = [])
     {
         // TODO: Implement debug() method.
     }
@@ -133,8 +142,14 @@ class Loger implements LoggerInterface
      *
      * @throws \Psr\Log\InvalidArgumentException
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
-        // TODO: Implement log() method.
+        $this->$level($message, $context);
+
+        $this->storage->setMessage(strtoupper($level) . '-|-' . $message);
+
+        $this->storage->setContext($context);
+
+        var_dump($this->storage->save());
     }
 }
