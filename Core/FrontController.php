@@ -4,6 +4,7 @@ namespace Core;
 
 use App\Service\Access;
 use Core\Interfaces\RouterInterface;
+use Core\LogSave\ToTxt;
 
 /**
  * Class FrontController
@@ -21,6 +22,7 @@ class FrontController
 
     public function run()
     {
+        $loger = new Loger();
 
         if ($this->router->response()){
 
@@ -43,6 +45,14 @@ class FrontController
                 echo $controller->$methodName();
 
             } else {
+
+                $loger->log('alert', 'Access Denied' , [
+                    'Access' =>  $params['access'],
+                    'Ctrl' => $controllerName,
+                    'Method' => $methodName,
+                    'ip' => $_SERVER['REMOTE_ADDR'],
+                    'User agent' => $_SERVER['HTTP_USER_AGENT']
+                ]);
 
                 header("HTTP/1.0 401 Unauthorized");
                 http_response_code(401);

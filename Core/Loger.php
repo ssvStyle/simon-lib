@@ -3,6 +3,8 @@
 namespace Core;
 
 use Core\LogSave\LogSaveInterf;
+use Core\LogSave\LogStorageFactory;
+use Core\LogSave\ToTxt;
 use Psr\Log\LoggerInterface;
 
 class Loger implements LoggerInterface
@@ -10,10 +12,11 @@ class Loger implements LoggerInterface
 
     protected $storage;
 
-    public function __construct(LogSaveInterf $storage)
+    public function __construct($type = 'txt')
     {
-        $this->storage = $storage;
-
+        if (LogStorageFactory::getStorage($type) instanceof LogSaveInterf) {
+            $this->storage = LogStorageFactory::getStorage($type);
+        }
     }
 
     /**

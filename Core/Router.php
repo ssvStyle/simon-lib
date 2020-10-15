@@ -16,8 +16,6 @@ class Router implements \Core\Interfaces\RouterInterface
 
     protected $params = [];
 
-    protected $parseRoute;
-
     public function __construct(string $request)
     {
         $patternGetParams = '~([?]\w*[=]\w*).+~';
@@ -38,8 +36,6 @@ class Router implements \Core\Interfaces\RouterInterface
         
         $this->routeMap = include __DIR__ . '/../routes/web.php';
 
-        $this->parseRoute = new ParseRoute();
-
         $this->requestMethod= filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
 
 
@@ -57,15 +53,18 @@ class Router implements \Core\Interfaces\RouterInterface
 
     public function response(): bool
     {
-        $loger = new Loger(new ToTxt());
+        $loger = new Loger();
 
 
         foreach ($this->routeMap as $web) {
 
             $routeReqMethod = $web['requestMethod'] ?? 'GET';
 
+            $route = str_replace('{', '(?<', $web['route']);
+            $route = str_replace('}', '>(\w*))', $route);
+
             $routeCond = $web['route'] === $this->request ||
-                         (bool)preg_match($this->parseRoute->getRegexpFromRoute($web['route']), $this->request, $params) &&
+                         (bool)preg_match('~^' . $route . '$~', $this->request, $params) &&
                          $this->requestMethod === $routeReqMethod;
 
             if ($routeCond) {

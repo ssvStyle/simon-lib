@@ -1,1 +1,13 @@
 
+2020-10-11 20:11:02-|-ALERT-|-Access Denied-|-Context-|-Access-{close}-|-Ctrl-{App\Controllers\Home}-|-Method-{index}-|-ip-{127.0.0.1}-|-user-{}-|-
+2020-10-11 20:17:30-|-ALERT-|-Access Denied-|-Context-|-Access-{close}-|-Ctrl-{App\Controllers\Home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-
+2020-10-11 20:18:13-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-11 20:18:15-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-11 20:18:15-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-11 20:18:16-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-11 20:18:16-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-11 20:18:16-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-15 01:09:47-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-15 01:09:52-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-15 01:12:23-|-INFO-|-Route not found-|-Context-|-Request-{/ho}-|-Request Method-{GET}-|-
+2020-10-15 01:13:06-|-INFO-|-Route not found-|-Context-|-Request-{/homefghfgh}-|-Request Method-{GET}-|-
