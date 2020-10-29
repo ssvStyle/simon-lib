@@ -28,3 +28,7 @@
 2020-10-29 13:01:27-|-INFO-|-Route not found-|-Context-|-Request-{/simon-lib.loc}-|-Request Method-{GET}-|-
 2020-10-29 13:01:27-|-INFO-|-Route not found-|-Context-|-Request-{/simon-lib.loc}-|-Request Method-{GET}-|-
 2020-10-29 13:01:28-|-INFO-|-Route not found-|-Context-|-Request-{/simon-lib.loc}-|-Request Method-{GET}-|-
+2020-10-29 13:25:50-|-ALERT-|-Access Denied-|-Context-|-Access-{admin}-|-Ctrl-{App\Controllers\Home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-
+2020-10-29 13:25:52-|-INFO-|-Route not found-|-Context-|-Request-{/login}-|-Request Method-{GET}-|-
+2020-10-29 13:26:59-|-INFO-|-Route not found-|-Context-|-Request-{/images/favicon.ico}-|-Request Method-{GET}-|-
+2020-10-29 13:27:00-|-ALERT-|-Access Denied-|-Context-|-Access-{admin}-|-Ctrl-{App\Controllers\Home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-

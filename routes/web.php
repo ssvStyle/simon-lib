@@ -35,22 +35,26 @@ return [
         'route' => '/',
         'controller' => 'home',
         'method' => 'index',
+        'access' => 'all'
     ],
     [
         'route' => '/home',
         'controller' => 'home',
         'method' => 'index',
+        'access' => 'all'
+
     ],
     [
         'route' => '/home/{id}',
         'controller' => 'home',
         'method' => 'index',
-        'access' => 'close'
+        'access' => 'all'
     ],
     [
         'route' => '/home/id/{id}/sort/{sort}',
         'controller' => 'home',
         'method' => 'index',
+        'access' => 'all'
     ],
 ]
 

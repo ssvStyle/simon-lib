@@ -2,8 +2,8 @@
 
 namespace Core;
 
-
 use Core\Interfaces\RouterInterface;
+use Core\Service\Access;
 
 /**
  * Class FrontController
@@ -21,7 +21,6 @@ class FrontController
 
     public function run()
     {
-        var_dump($_SERVER['HTTP_HOST']);die;
 
         $loger = new Loger();
 
