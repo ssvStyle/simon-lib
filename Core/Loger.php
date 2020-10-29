@@ -153,6 +153,6 @@ class Loger implements LoggerInterface
 
         $this->storage->setContext($context);
 
-        var_dump($this->storage->save());
+        $this->storage->save();
     }
 }

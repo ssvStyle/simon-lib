@@ -4,7 +4,7 @@ namespace Core\LogSave;
 
 class ToTxt implements LogSaveInterf
 {
-    protected $file = __DIR__ . '/../../log/app.log';
+    protected $file = __DIR__ . '../../../log/app.log';
 
     protected $message;
 

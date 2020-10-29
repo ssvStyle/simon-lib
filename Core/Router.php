@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Core\LogSave\ToTxt;
-
 class Router implements \Core\Interfaces\RouterInterface
 {
     protected $routeMap;
@@ -18,11 +16,12 @@ class Router implements \Core\Interfaces\RouterInterface
 
     public function __construct(string $request)
     {
+
         $patternGetParams = '~([?]\w*[=]\w*).+~';
 
         $request = preg_replace($patternGetParams, '', $request);
 
-        $request = preg_replace('~^\/[\w\-\.\+\?\#]*~', '', $request);
+        //$request = preg_replace('~^\/[\w\-\.\+\?\#]*~', '', $request);
 
         $request = preg_replace('~\/$~', '', $request);
 
@@ -34,7 +33,7 @@ class Router implements \Core\Interfaces\RouterInterface
 
         $this->request = $request;
         
-        $this->routeMap = include __DIR__ . '/../routes/web.php';
+        $this->routeMap = include __DIR__ . '../../routes/web.php';
 
         $this->requestMethod= filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
 
@@ -62,6 +61,7 @@ class Router implements \Core\Interfaces\RouterInterface
 
             $route = str_replace('{', '(?<', $web['route']);
             $route = str_replace('}', '>(\w*))', $route);
+
 
             $routeCond = $web['route'] === $this->request ||
                          (bool)preg_match('~^' . $route . '$~', $this->request, $params) &&

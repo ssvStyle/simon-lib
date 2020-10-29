@@ -2,9 +2,8 @@
 
 namespace Core;
 
-use App\Service\Access;
+
 use Core\Interfaces\RouterInterface;
-use Core\LogSave\ToTxt;
 
 /**
  * Class FrontController
@@ -22,6 +21,8 @@ class FrontController
 
     public function run()
     {
+        var_dump($_SERVER['HTTP_HOST']);die;
+
         $loger = new Loger();
 
         if ($this->router->response()){
@@ -33,7 +34,9 @@ class FrontController
 
             $access = new Access();
 
-            if ($access->permission($params['access'] ?? 'all')) {
+            $accessStatus = $params['access'] ?? 'admin';
+
+            if ($access->permission($accessStatus)) {
 
                 $controller = new $controllerName;
 
@@ -47,7 +50,7 @@ class FrontController
             } else {
 
                 $loger->log('alert', 'Access Denied' , [
-                    'Access' =>  $params['access'],
+                    'Access' =>  $accessStatus,
                     'Ctrl' => $controllerName,
                     'Method' => $methodName,
                     'ip' => $_SERVER['REMOTE_ADDR'],
@@ -56,7 +59,7 @@ class FrontController
 
                 header("HTTP/1.0 401 Unauthorized");
                 http_response_code(401);
-                exit('Access Denied. You don’t have permission to access for this page');
+                exit('Access Denied. You don’t have permission to access for this page <br><b>Please <a href="/login">login</a></b>');
 
             }
 
@@ -64,7 +67,7 @@ class FrontController
 
         } else {
 
-            include __DIR__ . '/../templates/404.html';
+            require_once __DIR__ . '../../templates/404.html';
 
             header("HTTP/1.0 404 Not Found");
             http_response_code(404);
