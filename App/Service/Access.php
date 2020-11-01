@@ -10,10 +10,10 @@ class Access extends AccessController
     public function permission()
     {
 
-        if (true) {
+        if ($this->accessList === 'all') {
             return;
         }
 
-        parent::permission();
+        $this->denied();
     }
 }

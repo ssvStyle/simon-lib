@@ -4,9 +4,10 @@ namespace Core;
 
 use Core\Interfaces\AccessInt;
 
-class AccessController implements AccessInt
+abstract class AccessController implements AccessInt
 {
     protected $loger, $routeMapParams;
+    public $accessList;
 
     public function __construct()
     {
@@ -18,16 +19,14 @@ class AccessController implements AccessInt
     {
         $this->routeMapParams = $routeMapParams;
         $this->routeMapParams['access'] = $routeMapParams['access'] ?? '';
+        $this->accessList = $this->routeMapParams['access'];
+
     }
 
-    public function permission()
+    abstract public function permission();
+
+    public function denied()
     {
-
-        if ($this->routeMapParams['access'] === 'all') {
-
-            return true;
-
-        }
 
         $this->loger->log('alert', 'Access Denied', [
             'Access' => $this->routeMapParams['access'],
@@ -41,6 +40,7 @@ class AccessController implements AccessInt
         http_response_code(401);
 
         exit('Access Denied. You don’t have permission to access for this page <br><b>Please <a href="/login">login</a></b>');
+
     }
 
 }
