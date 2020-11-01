@@ -99,3 +99,9 @@
 2020-11-01 16:11:14-|-ALERT-|-Access Denied-|-Context-|-Access-{all}-|-Ctrl-{home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-
 2020-11-01 16:11:30-|-ALERT-|-Access Denied-|-Context-|-Access-{all}-|-Ctrl-{home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-
 2020-11-01 16:12:54-|-ALERT-|-Access Denied-|-Context-|-Access-{all}-|-Ctrl-{home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-
+2020-11-01 16:17:41-|-ALERT-|-Access Denied-|-Context-|-Access-{admin}-|-Ctrl-{home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-
+2020-11-01 16:17:42-|-INFO-|-Route not found-|-Context-|-Request-{/login}-|-Request Method-{GET}-|-
+2020-11-01 16:24:11-|-INFO-|-Route not found-|-Context-|-Request-{/login}-|-Request Method-{GET}-|-
+2020-11-01 16:27:56-|-INFO-|-Route not found-|-Context-|-Request-{/register}-|-Request Method-{GET}-|-
+2020-11-01 16:28:10-|-ALERT-|-Access Denied-|-Context-|-Access-{admin}-|-Ctrl-{home}-|-Method-{index}-|-ip-{127.0.0.1}-|-User agent-{Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36}-|-
+2020-11-01 16:28:51-|-INFO-|-Route not found-|-Context-|-Request-{/home}-|-Request Method-{GET}-|-

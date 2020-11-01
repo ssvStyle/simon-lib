@@ -38,22 +38,15 @@ return [
         'access' => 'all'
     ],
     [
-        'route' => '/home',
-        'controller' => 'home',
-        'method' => 'index',
-        'access' => 'all'
-
-    ],
-    [
-        'route' => '/home/{id}',
-        'controller' => 'home',
-        'method' => 'index',
+        'route' => '/login',
+        'controller' => 'authorization',
+        'method' => 'login',
         'access' => 'all'
     ],
     [
-        'route' => '/home/id/{id}/sort/{sort}',
-        'controller' => 'home',
-        'method' => 'index',
+        'route' => '/register',
+        'controller' => 'authorization',
+        'method' => 'register',
         'access' => 'all'
     ],
 ]

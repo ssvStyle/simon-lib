@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Service;
 
-use App\Models\Db;
 
 class Pagination
 {
