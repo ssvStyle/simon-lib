@@ -35,7 +35,7 @@ return [
         'route' => '/',
         'controller' => 'home',
         'method' => 'index',
-        'access' => 'all'
+        'access' => 'no'
     ],
     [
         'route' => '/home',

@@ -2,17 +2,18 @@
 
 namespace App\Service;
 
-use Core\Interfaces\AccessInt;
+use Core\AccessController;
 
-class Access implements AccessInt
+class Access extends AccessController
 {
 
-    public function permission(string $permissionList): bool
+    public function permission()
     {
-        if ($permissionList === 'all') {
-            return true;
+
+        if (true) {
+            return;
         }
 
-        return false;
+        parent::permission();
     }
 }

@@ -4,15 +4,14 @@ $start = microtime(true);
 
 include __DIR__ . '/../vendor/autoload.php';
 
-use Core\FrontController;
-use Core\Router;
+use Core\MyApp;
 
 /**
  * SIMON-LIB
  */
 
 
-$myApp = new FrontController(new Router( $_SERVER['REQUEST_URI'] ));
+$myApp = new MyApp();
 
 $myApp->run();
 

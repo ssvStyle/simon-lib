@@ -5,5 +5,6 @@ namespace Core\Interfaces;
 
 interface AccessInt
 {
-    public function permission(string $permissionList) : bool ;
+    public function setRouteMapParams(array $routeMapParams);
+    public function permission();
 }

@@ -35,7 +35,7 @@ class Router implements \Core\Interfaces\RouterInterface
         
         $this->routeMap = include __DIR__ . '../../routes/web.php';
 
-        $this->requestMethod= filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
+        $this->requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
 
 
     }
@@ -50,10 +50,9 @@ class Router implements \Core\Interfaces\RouterInterface
         return $this->routeMapParams;
     }
 
-    public function response(): bool
+    public function response()
     {
         $loger = new Loger();
-
 
         foreach ($this->routeMap as $web) {
 
@@ -83,7 +82,7 @@ class Router implements \Core\Interfaces\RouterInterface
 
                 $this->routeMapParams = $web;
 
-                return true;
+                return;
 
             }
         }
@@ -92,6 +91,13 @@ class Router implements \Core\Interfaces\RouterInterface
             'Request' =>  $this->request,
             'Request Method' => $this->requestMethod,
         ]);
-        return false;
+
+
+        header("HTTP/1.0 404 Not Found");
+        http_response_code(404);
+
+        require_once __DIR__ . '../../templates/404.html';
+
+        exit();
     }
 }

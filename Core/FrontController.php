@@ -3,75 +3,52 @@
 namespace Core;
 
 use Core\Interfaces\RouterInterface;
-use Core\Service\Access;
+use Core\Service\AccessController;
 
 /**
  * Class FrontController
  *
  * @package Core
+ *
  */
 class FrontController
 {
-    protected $router;
+    protected $loger, $routeMapParams, $data;
 
-    public function __construct(RouterInterface $router)
+    public function __construct()
     {
-        $this->router = $router;
+        $this->loger = new Loger();
+
     }
 
-    public function run()
+    public function setRouteMapParams(array $params)
+    {
+        $this->routeMapParams = $params;
+    }
+
+
+
+    public function setGetData(array $params)
+    {
+        $this->data = $params;
+    }
+
+    public function start()
     {
 
-        $loger = new Loger();
+        $controllerName = 'App\Controllers\\' . ucfirst($this->routeMapParams['controller']);
+        $methodName = $this->routeMapParams['method'];
 
-        if ($this->router->response()){
+        $controller = new $controllerName;
 
-            $params = $this->router->getRouteMapParams();
+        $controller->setData($this->data);
 
-            $controllerName = 'App\Controllers\\' . ucfirst($params['controller']);
-            $methodName = $params['method'];
+        header('Access-Control-Allow-Origin: *');
+        header('Content-type: text/html; charset=utf-8');
+        http_response_code(200);
 
-            $access = new Access();
+        echo $controller->$methodName();
 
-            $accessStatus = $params['access'] ?? 'admin';
-
-            if ($access->permission($accessStatus)) {
-
-                $controller = new $controllerName;
-
-                $controller->setData($this->router->getParams());
-
-                header('Access-Control-Allow-Origin: *');
-                header('Content-type: text/html; charset=utf-8');
-
-                echo $controller->$methodName();
-
-            } else {
-
-                $loger->log('alert', 'Access Denied' , [
-                    'Access' =>  $accessStatus,
-                    'Ctrl' => $controllerName,
-                    'Method' => $methodName,
-                    'ip' => $_SERVER['REMOTE_ADDR'],
-                    'User agent' => $_SERVER['HTTP_USER_AGENT']
-                ]);
-
-                header("HTTP/1.0 401 Unauthorized");
-                http_response_code(401);
-                exit('Access Denied. You don’t have permission to access for this page <br><b>Please <a href="/login">login</a></b>');
-
-            }
-
-
-
-        } else {
-
-            require_once __DIR__ . '../../templates/404.html';
-
-            header("HTTP/1.0 404 Not Found");
-            http_response_code(404);
-
-        }
 
     }
 
