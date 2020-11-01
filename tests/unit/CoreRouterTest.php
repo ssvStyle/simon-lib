@@ -111,6 +111,16 @@ final class CoreRouterTest extends TestCase
         $this->assertArrayHasKey('sort', $router->getParams());
     }
 
+    public function testIsIssetTwoParamsNoCenterParamAndIssetRouteVsThreeParamsAndSameValue()
+    {
+        $router = new tests\unit\Router('/test3/page/6/field/name/sort/asc');
+        $this->assertTrue($router->response());
+        $this->assertArrayHasKey('page', $router->getParams());
+        $this->assertArrayHasKey('field', $router->getParams());
+        $this->assertArrayHasKey('sort', $router->getParams());
+        $this->assertContains($router->getParams(), ['page' => '6', 'field' => 'name', 'sort' => 'asc']);
+    }
+
 
 
 }
