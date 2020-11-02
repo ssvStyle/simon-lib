@@ -4,6 +4,8 @@ $start = microtime(true);
 
 include __DIR__ . '/../vendor/autoload.php';
 
+include __DIR__ . '/../Core/helperFunctions.php';
+
 use Core\MyApp;
 
 /**

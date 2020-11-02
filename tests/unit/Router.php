@@ -58,6 +58,12 @@ class Router implements \Core\Interfaces\RouterInterface
                 'method' => 'index',
                 'access' => 'all'
             ],
+            [
+                'route' => '/test3/page/{page}(/field/{field})?(/sort/{sort})?',
+                'controller' => 'home',
+                'method' => 'index',
+                'access' => 'all'
+            ],
         ];
 
         $this->requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
@@ -82,7 +88,7 @@ class Router implements \Core\Interfaces\RouterInterface
 
             $routeReqMethod = $web['requestMethod'] ?? 'GET';
 
-            if ((bool)preg_match('~\?~', $web['route'])) {
+            if ((bool)preg_match('~\}\?~', $web['route'])) {
 
                 $route = str_replace('/{', '(/(?<', $web['route']);
                 $route = str_replace('}', '>(\w*)))', $route);
@@ -100,22 +106,25 @@ class Router implements \Core\Interfaces\RouterInterface
 
             if ($routeCond) {
 
+                $emptyParamValue = false;
+
                 if (!empty($params)) {
 
                     foreach ($params as $k => $v) {
+                        if (empty($v)){
+                            $emptyParamValue = true;
+                        }
                         if (!is_numeric($k)) {
-
                             $this->params[$k] = $v;
-
                         }
                     }
 
                 }
 
-                $this->routeMapParams = $web;
-
-                return true;
-
+                if (!$emptyParamValue){
+                    $this->routeMapParams = $web;
+                    return true;
+                }
             }
         }
 

@@ -102,15 +102,6 @@ final class CoreRouterTest extends TestCase
 
     }
 
-    public function testIsIssetThreeParamAndIssetRouteVsEmptyParams()
-    {
-        $router = new tests\unit\Router('/test3/page//field/name/sort/asc');
-        $this->assertFalse($router->response());
-        $this->assertArrayHasKey('page', $router->getParams());
-        $this->assertArrayHasKey('field', $router->getParams());
-        $this->assertArrayHasKey('sort', $router->getParams());
-    }
-
     public function testIsIssetTwoParamsNoCenterParamAndIssetRouteVsThreeParamsAndSameValue()
     {
         $router = new tests\unit\Router('/test3/page/6/field/name/sort/asc');
@@ -118,9 +109,22 @@ final class CoreRouterTest extends TestCase
         $this->assertArrayHasKey('page', $router->getParams());
         $this->assertArrayHasKey('field', $router->getParams());
         $this->assertArrayHasKey('sort', $router->getParams());
-        $this->assertContains($router->getParams(), ['page' => '6', 'field' => 'name', 'sort' => 'asc']);
+        $this->assertContains('6', $router->getParams());
+        $this->assertContains('name', $router->getParams());
+        $this->assertContains('asc', $router->getParams());
+
     }
 
+    public function testIsIssetThreeParamAndIssetRouteVsEmptyParams()
+    {
+        $router = new tests\unit\Router('/test3/page//field/name/sort/asc');
+        $this->assertFalse($router->response());
+    }
 
+    public function testIsIssetThreeParamAndIssetRouteVsNotPasteParams()
+    {
+        $router = new tests\unit\Router('/test3/page/field/name/sort/asc');
+        $this->assertFalse($router->response());
+    }
 
 }
