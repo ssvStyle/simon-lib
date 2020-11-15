@@ -126,3 +126,5 @@
 2020-11-15 14:52:03-|-INFO-|-Route not found-|-Context-|-Request-{/home}-|-Request Method-{GET}-|-
 2020-11-15 15:00:32-|-INFO-|-Route not found-|-Context-|-Request-{/home}-|-Request Method-{GET}-|-
 2020-11-15 15:06:45-|-INFO-|-Route not found-|-Context-|-Request-{/home}-|-Request Method-{GET}-|-
+2020-11-15 15:23:17-|-INFO-|-Route not found-|-Context-|-Request-{/log}-|-Request Method-{GET}-|-
+2020-11-15 15:23:17-|-INFO-|-Route not found-|-Context-|-Request-{/log/public/css/404.css}-|-Request Method-{GET}-|-

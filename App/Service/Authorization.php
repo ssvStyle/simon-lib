@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use \App\Models\Db as db;
+use Core\Storage\CreateMysql as db;
 
 class Authorization
 {
@@ -14,7 +14,8 @@ class Authorization
 
     /**
      * AuthService constructor.
-     * @param \App\Models\Db $db
+     *
+     * @param Core\Storage\CreateMysql
      *
      */
     public function __construct(Db $db)
