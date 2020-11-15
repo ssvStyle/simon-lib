@@ -2,6 +2,8 @@
 
 namespace tests\unit;
 
+use Core\Interfaces\RequestInterface;
+
 class Router implements \Core\Interfaces\RouterInterface
 {
     protected $routeMap;
@@ -14,7 +16,7 @@ class Router implements \Core\Interfaces\RouterInterface
 
     protected $params = [];
 
-    public function __construct(string $request)
+    public function __construct(RequestInterface $request)
     {
 
         $patternGetParams = '~([?]\w*[=]\w*).+~';
@@ -36,6 +38,12 @@ class Router implements \Core\Interfaces\RouterInterface
         $this->routeMap = [
             [
                 'route' => '/',
+                'controller' => 'home',
+                'method' => 'index',
+                'access' => 'all'
+            ],
+            [
+                'route' => '/test/id',
                 'controller' => 'home',
                 'method' => 'index',
                 'access' => 'all'

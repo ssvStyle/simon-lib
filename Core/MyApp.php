@@ -34,7 +34,7 @@ class MyApp
      */
     public function __construct()
     {
-        $this->router = new Router( $_SERVER['REQUEST_URI'] );
+        $this->router = new Router( new Request( $_SERVER['REQUEST_URI'] ) );
         $this->frontController = new FrontController();
         $this->accessController = new AccessController();
 

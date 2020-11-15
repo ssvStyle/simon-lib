@@ -2,11 +2,11 @@
 
 namespace Core;
 
+use Core\Interfaces\RequestInterface;
+
 class Router implements \Core\Interfaces\RouterInterface
 {
     protected $routeMap;
-
-    protected $requestMethod;
 
     protected $routeMapParams;
     
@@ -14,28 +14,12 @@ class Router implements \Core\Interfaces\RouterInterface
 
     protected $params = [];
 
-    public function __construct(string $request)
+    public function __construct(RequestInterface $request)
     {
-
-        $patternGetParams = '~([?]\w*[=]\w*).+~';
-
-        $request = preg_replace($patternGetParams, '', $request);
-
-        //$request = preg_replace('~^\/[\w\-\.\+\?\#]*~', '', $request);
-
-        $request = preg_replace('~\/$~', '', $request);
-
-        if ( empty( $request ) ) {
-
-            $request = '/';
-
-        }
 
         $this->request = $request;
         
         $this->routeMap = include __DIR__ . '../../routes/web.php';
-
-        $this->requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
 
 
     }
@@ -58,32 +42,35 @@ class Router implements \Core\Interfaces\RouterInterface
 
             $routeReqMethod = $web['requestMethod'] ?? 'GET';
 
-            $route = str_replace('{', '(?<', $web['route']);
-            $route = str_replace('}', '>(\w*))', $route);
+            if ((bool)preg_match('~\}\?~', $web['route'])) {
+                $route = str_replace('/{', '(/(?<', $web['route']);
+                $route = str_replace('}', '>(\w*)))', $route);
+            } else {
+                $route = str_replace('{', '(?<', $web['route']);
+                $route = str_replace('}', '>(\w*))', $route);
+            }
 
-
-            $routeCond = $web['route'] === $this->request ||
-                         (bool)preg_match('~^' . $route . '$~', $this->request, $params) &&
-                         $this->requestMethod === $routeReqMethod;
+            $routeCond = ($web['route'] === $this->request ||
+                (bool)preg_match('~^' . $route . '$~', $this->request, $params) &&
+                $this->request->getMethod() === $routeReqMethod);
 
             if ($routeCond) {
-
+                $emptyParamValue = false;
                 if (!empty($params)) {
-
                     foreach ($params as $k => $v) {
+                        if (empty($v)){
+                            $emptyParamValue = true;
+                        }
                         if (!is_numeric($k)) {
-
                             $this->params[$k] = $v;
-
                         }
                     }
-
                 }
 
-                $this->routeMapParams = $web;
-
-                return;
-
+                if (!$emptyParamValue){
+                    $this->routeMapParams = $web;
+                    return true;
+                }
             }
         }
 

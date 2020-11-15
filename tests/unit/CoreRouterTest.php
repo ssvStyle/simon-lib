@@ -7,56 +7,63 @@ final class CoreRouterTest extends TestCase
 {
     public function testIsIssetRoute()
     {
-        $router = new tests\unit\Router('/');
+        $router = new tests\unit\Router(new \Core\Request('/'));
 
         $this->assertTrue($router->response());
     }
 
     public function testIsNotIssetRoute()
     {
-        $router = new tests\unit\Router('/notFound');
+        $router = new tests\unit\Router(new \Core\Request('/notFound'));
 
         $this->assertFalse($router->response());
     }
 
     public function testIsNotIssetParamAndIssetRoute()
     {
-        $router = new tests\unit\Router('/test');
+        $router = new tests\unit\Router(new \Core\Request('/test'));
 
         $this->assertTrue($router->response());
     }
 
     public function testIsIssetParamAndIssetRoute()
     {
-        $router = new tests\unit\Router('/test/5');
+        $router = new tests\unit\Router(new \Core\Request('/test/5'));
+
+        $this->assertTrue($router->response());
+    }
+
+    public function testIsIssetParamVsRouteAndRouteLikeParam()
+    {
+        $router = new tests\unit\Router(new \Core\Request('/test/id'));
 
         $this->assertTrue($router->response());
     }
 
     public function testIsIssetTwoParamAndIssetRoute()
     {
-        $router = new tests\unit\Router('/test2/5/8');
+        $router = new tests\unit\Router(new \Core\Request('/test2/5/8'));
 
         $this->assertTrue($router->response());
     }
 
     public function testIsIssetOneParamAndIssetRoute()
     {
-        $router = new tests\unit\Router('/test2/5');
+        $router = new tests\unit\Router(new \Core\Request('/test2/5'));
 
         $this->assertTrue($router->response());
     }
 
     public function testIsIssetOneParamAndIssetRouteAndHasKey()
     {
-        $router = new tests\unit\Router('/test2/5');
+        $router = new tests\unit\Router(new \Core\Request('/test2/5'));
         $router->response();
         $this->assertArrayHasKey('id', $router->getParams());
     }
 
     public function testIsIssetTwoParamAndIssetRouteAndHasTwoKeys()
     {
-        $router = new tests\unit\Router('/test2/5/8');
+        $router = new tests\unit\Router(new \Core\Request('/test2/5/8'));
         $router->response();
         $this->assertArrayHasKey('id', $router->getParams());
         $this->assertArrayHasKey('page', $router->getParams());
@@ -64,21 +71,21 @@ final class CoreRouterTest extends TestCase
 
     public function testIsNotIssetParamAndIssetRouteVsThreeParams()
     {
-        $router = new tests\unit\Router('/test3');
+        $router = new tests\unit\Router(new \Core\Request('/test3'));
         $this->assertTrue($router->response());
 
     }
 
     public function testIsIssetOneParamAndIssetRouteVsThreeParams()
     {
-        $router = new tests\unit\Router('/test3/page/4');
+        $router = new tests\unit\Router(new \Core\Request('/test3/page/4'));
         $router->response();
         $this->assertArrayHasKey('page', $router->getParams());
     }
 
     public function testIsIssetTwoParamAndIssetRouteVsThreeParams()
     {
-        $router = new tests\unit\Router('/test3/page/4/field/name');
+        $router = new tests\unit\Router(new \Core\Request('/test3/page/4/field/name'));
         $router->response();
         $this->assertArrayHasKey('page', $router->getParams());
         $this->assertArrayHasKey('field', $router->getParams());
@@ -86,7 +93,7 @@ final class CoreRouterTest extends TestCase
 
     public function testIsIssetThreeParamAndIssetRouteVsThreeParams()
     {
-        $router = new tests\unit\Router('/test3/page/6/field/name/sort/asc');
+        $router = new tests\unit\Router(new \Core\Request('/test3/page/6/field/name/sort/asc'));
         $router->response();
         $this->assertArrayHasKey('page', $router->getParams());
         $this->assertArrayHasKey('field', $router->getParams());
@@ -95,7 +102,7 @@ final class CoreRouterTest extends TestCase
 
     public function testIsIssetTwoParamsNoCenterParamAndIssetRouteVsThreeParams()
     {
-        $router = new tests\unit\Router('/test3/page/4/sort/desc');
+        $router = new tests\unit\Router(new \Core\Request('/test3/page/4/sort/desc'));
         $router->response();
         $this->assertArrayHasKey('page', $router->getParams());
         $this->assertArrayHasKey('sort', $router->getParams());
@@ -104,7 +111,7 @@ final class CoreRouterTest extends TestCase
 
     public function testIsIssetTwoParamsNoCenterParamAndIssetRouteVsThreeParamsAndSameValue()
     {
-        $router = new tests\unit\Router('/test3/page/6/field/name/sort/asc');
+        $router = new tests\unit\Router(new \Core\Request('/test3/page/6/field/name/sort/asc'));
         $this->assertTrue($router->response());
         $this->assertArrayHasKey('page', $router->getParams());
         $this->assertArrayHasKey('field', $router->getParams());
@@ -117,13 +124,13 @@ final class CoreRouterTest extends TestCase
 
     public function testIsIssetThreeParamAndIssetRouteVsEmptyParams()
     {
-        $router = new tests\unit\Router('/test3/page//field/name/sort/asc');
+        $router = new tests\unit\Router(new \Core\Request('/test3/page//field/name/sort/asc'));
         $this->assertFalse($router->response());
     }
 
     public function testIsIssetThreeParamAndIssetRouteVsNotPasteParams()
     {
-        $router = new tests\unit\Router('/test3/page/field/name/sort/asc');
+        $router = new tests\unit\Router(new \Core\Request('/test3/page/field/name/sort/asc'));
         $this->assertFalse($router->response());
     }
 
