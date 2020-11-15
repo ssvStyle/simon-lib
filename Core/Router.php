@@ -4,39 +4,74 @@ namespace Core;
 
 use Core\Interfaces\RequestInterface;
 
+/**
+ * Class Router
+ *
+ * @package Core
+ */
 class Router implements \Core\Interfaces\RouterInterface
 {
+    /**
+    * @var array
+    */
     protected $routeMap;
 
+    /**
+     * @var array
+     */
     protected $routeMapParams;
-    
+
+    /**
+     * @var object
+     *
+     * RequestInterface
+     */
     protected $request;
 
+    /**
+     * @var array
+     */
     protected $params = [];
+
+    /**
+     * @var object
+     */
+    protected $logger;
+
+    /**
+     * Router constructor.
+     *
+     * @param RequestInterface $request
+     */
 
     public function __construct(RequestInterface $request)
     {
-
         $this->request = $request;
-        
         $this->routeMap = include __DIR__ . '../../routes/web.php';
-
-
+        $this->logger = new Loger();
     }
 
+    /**
+     * @return array
+     */
     public function getParams() : array
     {
         return $this->params;
     }
 
+    /**
+     * @return array
+     */
     public function getRouteMapParams() : array
     {
         return $this->routeMapParams;
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function response()
     {
-        $loger = new Loger();
 
         foreach ($this->routeMap as $web) {
 
@@ -50,8 +85,8 @@ class Router implements \Core\Interfaces\RouterInterface
                 $route = str_replace('}', '>(\w*))', $route);
             }
 
-            $routeCond = ($web['route'] === $this->request ||
-                (bool)preg_match('~^' . $route . '$~', $this->request, $params) &&
+            $routeCond = ($web['route'] === $this->request->get() ||
+                (bool)preg_match('~^' . $route . '$~', $this->request->get(), $params) &&
                 $this->request->getMethod() === $routeReqMethod);
 
             if ($routeCond) {
@@ -74,9 +109,9 @@ class Router implements \Core\Interfaces\RouterInterface
             }
         }
 
-        $loger->log('info', 'Route not found' , [
-            'Request' =>  $this->request,
-            'Request Method' => $this->requestMethod,
+        $this->logger->log('info', 'Route not found' , [
+            'Request' =>  $this->request->get(),
+            'Request Method' => $this->request->getMethod(),
         ]);
 
 

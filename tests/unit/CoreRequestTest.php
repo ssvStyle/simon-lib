@@ -12,4 +12,11 @@ final class CoreRequestTest extends TestCase
         $this->assertStringContainsString('/', $request->get());
     }
 
+    public function testIsIgnoreGetParams()
+    {
+        $request = new \Core\Request('/home?id=5&name=ssv');
+
+        $this->assertTrue((bool)preg_match('~^\/home$~', $request->get()));
+    }
+
 }

@@ -18,16 +18,10 @@ class Request implements RequestInterface
 
     public function __construct(string $request)
     {
-
-        $patternGetParams = '~([?]\w*[=]\w*).+~';
-
-        $request = preg_replace($patternGetParams, '', $request);
-
-        //$request = preg_replace('~^\/[\w\-\.\+\?\#]*~', '', $request);
-
+        $request = stristr($request, '?', true) ?: $request;
         $request = preg_replace('~\/$~', '', $request);
 
-        if ( empty( $request ) ) {
+        if (empty( $request) ) {
 
             $request = '/';
 

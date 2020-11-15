@@ -6,32 +6,35 @@ use Core\Interfaces\RequestInterface;
 
 class Router implements \Core\Interfaces\RouterInterface
 {
+    /**
+     * @var array
+     */
     protected $routeMap;
 
-    protected $requestMethod;
-
+    /**
+     * @var array
+     */
     protected $routeMapParams;
-    
+
+    /**
+     * @var object
+     *
+     * RequestInterface
+     */
     protected $request;
 
+    /**
+     * @var array
+     */
     protected $params = [];
 
+    /**
+     * Router constructor.
+     *
+     * @param RequestInterface $request
+     */
     public function __construct(RequestInterface $request)
     {
-
-        $patternGetParams = '~([?]\w*[=]\w*).+~';
-
-        $request = preg_replace($patternGetParams, '', $request);
-
-        //$request = preg_replace('~^\/[\w\-\.\+\?\#]*~', '', $request);
-
-        $request = preg_replace('~\/$~', '', $request);
-
-        if ( empty( $request ) ) {
-
-            $request = '/';
-
-        }
 
         $this->request = $request;
         
@@ -74,8 +77,6 @@ class Router implements \Core\Interfaces\RouterInterface
             ],
         ];
 
-        $this->requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_ENCODED);
-
 
     }
 
@@ -108,9 +109,9 @@ class Router implements \Core\Interfaces\RouterInterface
 
             }
 
-            $routeCond = ($web['route'] === $this->request ||
-                         (bool)preg_match('~^' . $route . '$~', $this->request, $params));// &&
-                         //$this->requestMethod === $routeReqMethod);
+            $routeCond = ($web['route'] === $this->request->get() ||
+                         (bool)preg_match('~^' . $route . '$~', $this->request->get(), $params));// &&
+                         //$this->request->getMethod() === $routeReqMethod);
 
             if ($routeCond) {
 

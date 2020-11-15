@@ -2,9 +2,6 @@
 
 namespace Core;
 
-use Core\Interfaces\RouterInterface;
-use Core\Service\AccessController;
-
 /**
  * Class FrontController
  *
@@ -13,26 +10,41 @@ use Core\Service\AccessController;
  */
 class FrontController
 {
+    /**
+     * @var loger
+     * @var routeMapParams
+     * @var data
+     */
     protected $loger, $routeMapParams, $data;
 
+    /**
+     * FrontController constructor.
+     */
     public function __construct()
     {
         $this->loger = new Loger();
 
     }
 
+    /**
+     * @param array $params
+     */
     public function setRouteMapParams(array $params)
     {
         $this->routeMapParams = $params;
     }
 
-
-
+    /**
+     * @param array $params
+     */
     public function setGetData(array $params)
     {
         $this->data = $params;
     }
 
+    /**
+     * @return text|html
+     */
     public function start()
     {
 

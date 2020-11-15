@@ -7,7 +7,9 @@ use App\Service\Access as AccessController;
 /**
  * Class MyApp
  *
- * facade app
+ * Facade app
+ *
+ * https://refactoring.guru/ru/design-patterns/facade
  *
  * @package Core
  */

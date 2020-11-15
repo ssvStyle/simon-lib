@@ -2,10 +2,14 @@
 
 namespace Core;
 
-use App\Models\User;
 use App\View;
 use Core\Interfaces\BaseController as BaseControllerInterfase;
 
+/**
+ * Class BaseController
+ *
+ * @package Core
+ */
 abstract class BaseController implements BaseControllerInterfase
 {
     /*
@@ -20,6 +24,9 @@ abstract class BaseController implements BaseControllerInterfase
 
     public $view;
 
+    /**
+     * BaseController constructor.
+     */
     public function __construct()
     {
 
@@ -46,6 +53,11 @@ abstract class BaseController implements BaseControllerInterfase
         $this->data = $data;
     }
 
+    /**
+     * @param bool $bool
+     *
+     * @return $this
+     */
     public function access($bool = true)
     {
         if (!$bool) {
@@ -56,6 +68,9 @@ abstract class BaseController implements BaseControllerInterfase
         return $this;
     }
 
+    /**
+     * @param string $link
+     */
     public function redirectTo($link = '/')
     {
 
@@ -63,6 +78,11 @@ abstract class BaseController implements BaseControllerInterfase
 
     }
 
+    /**
+     *@description set session notifications
+     *
+     * @param array $notifi
+     */
     public function setGlobalNotifications(array $notifi = [])
     {
 

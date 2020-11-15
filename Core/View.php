@@ -33,11 +33,20 @@ class View
         return $content;
     }
 
+    /**
+     * @param $template
+     */
     public function display($template)
     {
         echo $this->render($template);
     }
 
+    /**
+     * @param string $varName
+     *
+     * @param $data
+     * @return $this
+     */
     public function withParams(string $varName, $data)
     {
         $this->data[$varName] = $data;
