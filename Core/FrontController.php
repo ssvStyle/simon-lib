@@ -11,9 +11,9 @@ namespace Core;
 class FrontController
 {
     /**
-     * @var loger
-     * @var routeMapParams
-     * @var data
+     * @var loger|object
+     * @var routeMapParams|array
+     * @var data|array
      */
     protected $loger, $routeMapParams, $data;
 
